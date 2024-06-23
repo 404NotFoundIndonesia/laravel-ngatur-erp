@@ -21,12 +21,12 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $productionCost = fake()->numberBetween(0, 15_000_000);
-        $originalPrice = fake()->numberBetween($productionCost+100, $productionCost+10_000_000);
-        $salePrice = fake()->numberBetween($originalPrice-1_000, $originalPrice);
+        $originalPrice = fake()->numberBetween($productionCost + 100, $productionCost + 10_000_000);
+        $salePrice = fake()->numberBetween($originalPrice - 1_000, $originalPrice);
 
         return [
             'name' => fake()->sentence(),
-            'sku' => strtoupper(fake()->lexify('?????') . fake()->numerify('#####')),
+            'sku' => strtoupper(fake()->lexify('?????').fake()->numerify('#####')),
             'description' => fake()->paragraph(),
             'status' => fake()->randomElement(ProductStatus::cases())?->value,
             'height' => fake()->randomFloat(2, 1, 10.00),

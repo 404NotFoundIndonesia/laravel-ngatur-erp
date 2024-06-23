@@ -2,7 +2,8 @@
 
 namespace App\Enum;
 
-enum ProductStatus: string {
+enum ProductStatus: string
+{
     case DRAFT = 'draft';
     // The product information is being created and is not yet ready for use in the ERP system.
 

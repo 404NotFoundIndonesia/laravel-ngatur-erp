@@ -2,7 +2,8 @@
 
 namespace App\Enum;
 
-enum Currency: string {
+enum Currency: string
+{
     // Common Currencies
     case USD = 'USD'; // US Dollar
     case EUR = 'EUR'; // Euro
@@ -50,8 +51,9 @@ enum Currency: string {
     case LBP = 'LBP'; // Lebanese Pound
 
     // Example of using the enum
-    public function symbol(): string {
-        return match($this) {
+    public function symbol(): string
+    {
+        return match ($this) {
             Currency::USD => '$',
             Currency::EUR => '€',
             Currency::GBP => '£',
