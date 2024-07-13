@@ -2,9 +2,8 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
-import { currency, snakeCaseToTitleCase } from '@/util';
+import {currency, deleteConfirmation, snakeCaseToTitleCase} from '@/util';
 import { ref } from 'vue';
-import Swal from 'sweetalert2';
 
 const page = usePage();
 const selected = ref([]);
@@ -19,44 +18,22 @@ const selectAll = () => {
 }
 
 const destroy = (id) => {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#E02424",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonColor: "#6875F5",
-        cancelButtonText: "No, cancel",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            router.delete(route('products.destroy', id), {
-                preserveState: true,
-                preserveScroll: true,
-            });
-        }
+    deleteConfirmation(() => {
+        router.delete(route('products.destroy', id), {
+            preserveState: true,
+            preserveScroll: true,
+        });
     });
 };
 
 const destroyBulk = () => {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#E02424",
-        confirmButtonText: "Yes, delete selected product!",
-        cancelButtonColor: "#6875F5",
-        cancelButtonText: "No, cancel",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const queryParam = new URLSearchParams({ids: selected.value});
-            router.delete(route('products.destroy-bulk') + '?' + queryParam, {
-                preserveState: true,
-                preserveScroll: true,
-                onSuccess: () => selected.value = [],
-            });
-        }
+    deleteConfirmation(() => {
+        const queryParam = new URLSearchParams({ids: selected.value});
+        router.delete(route('products.destroy-bulk') + '?' + queryParam, {
+            preserveState: true,
+            preserveScroll: true,
+            onSuccess: () => selected.value = [],
+        });
     });
 }
 
@@ -137,7 +114,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                         @click="() => filterStatus(status)"
                                         href="#"
                                         :class="{
-                                            'inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500': ($page.props.request?.status ?? 'all') === status,
+                                            'inline-block p-4 text-rose-600 border-b-2 border-rose-600 rounded-t-lg active dark:text-rose-500 dark:border-rose-500': ($page.props.request?.status ?? 'all') === status,
                                             'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300': ($page.props.request?.status ?? 'all') !== status,
                                         }">
                                         {{ snakeCaseToTitleCase(status) }}
@@ -155,7 +132,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                 </h5>
                             </div>
                             <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
-                                <Link :href="route('products.create')" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
+                                <Link :href="route('products.create')" class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-rose-500 hover:bg-rose-600 focus:ring-4 focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 focus:outline-none dark:focus:ring-rose-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus me-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M12 5l0 14" />
@@ -163,7 +140,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                     </svg>
                                     Add new product
                                 </Link>
-                                <button type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-indigo-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                <button type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-rose-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh me-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
@@ -171,7 +148,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                     </svg>
                                     Update stocks 1/250
                                 </button>
-                                <button type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-indigo-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                <button type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-rose-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload me-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
@@ -188,7 +165,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                     <tr>
                                         <th scope="col" class="p-4">
                                             <div class="flex items-center">
-                                                <input id="checkbox-all" :checked="selected.length === $page.props.products.data?.length" @change="selectAll" type="checkbox" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input id="checkbox-all" :checked="selected.length === $page.props.products.data?.length" @change="selectAll" type="checkbox" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="checkbox-all" class="sr-only">checkbox</label>
                                             </div>
                                         </th>
@@ -207,7 +184,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                         <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700" v-for="product in $page.props.products.data" :key="product.id">
                                             <td class="w-4 px-4 py-3">
                                                 <div class="flex items-center">
-                                                    <input :id="`checkbox-table-search-${product.id}`" v-model="selected" :value="product.id" type="checkbox" onclick="event.stopPropagation()" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <input :id="`checkbox-table-search-${product.id}`" v-model="selected" :value="product.id" type="checkbox" onclick="event.stopPropagation()" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                     <label :for="`checkbox-table-search-${product.id}`" class="sr-only">checkbox</label>
                                                 </div>
                                             </td>
@@ -223,7 +200,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                                 </div>
                                             </th>
                                             <td class="px-4 py-2">
-                                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 whitespace-nowrap rounded dark:bg-indigo-900 dark:text-indigo-300">No Category</span>
+                                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 whitespace-nowrap rounded dark:bg-rose-900 dark:text-rose-300">No Category</span>
                                             </td>
                                             <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ currency(product.sale_price, product.currency) }}</td>
                                             <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -276,13 +253,13 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
         <nav v-show="selected.length > 0" class="fixed bottom-0 w-full bg-white shadow-xl z-50 dark:bg-gray-800">
             <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
                 <div class="flex">
-                    <button @click="() => changeStatusBulk('archived')" v-if="$page.props.request?.status === 'active'" type="button" class="me-2 px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
+                    <button @click="() => changeStatusBulk('archived')" v-if="$page.props.request?.status === 'active'" type="button" class="me-2 px-4 py-2 text-sm font-medium text-white rounded-lg bg-rose-500 hover:bg-rose-600 focus:ring-4 focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 focus:outline-none dark:focus:ring-rose-800">
                         Archive Selected
                     </button>
-                    <button @click="() => changeStatusBulk('active')" v-if="$page.props.request?.status === 'archived'" type="button" class="me-2 px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
+                    <button @click="() => changeStatusBulk('active')" v-if="$page.props.request?.status === 'archived'" type="button" class="me-2 px-4 py-2 text-sm font-medium text-white rounded-lg bg-rose-500 hover:bg-rose-600 focus:ring-4 focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 focus:outline-none dark:focus:ring-rose-800">
                         Activate Selected
                     </button>
-                    <button @click="destroyBulk" type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-indigo-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    <button @click="destroyBulk" type="button" class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-rose-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                         Delete Selected
                     </button>
                 </div>

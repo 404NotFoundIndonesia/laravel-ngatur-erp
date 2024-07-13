@@ -115,7 +115,7 @@ const submitDraft = () => {
                                 </div>
                                 <div class="sm:col-span-2">
                                     <InputLabel for="description" value="Description" />
-                                    <textarea id="description" v-model="form.description" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
+                                    <textarea id="description" v-model="form.description" rows="4" class="mt-1 block w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm"></textarea>
                                     <InputError :message="form.errors.description" class="mt-2" />
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ const submitDraft = () => {
                                     <div>
                                         <InputLabel for="currency" value="Currency" :required="true" />
                                         <select
-                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                            class="mt-1 block w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm"
                                             id="currency"
                                             v-model="form.currency">
                                             <option :value="c" v-for="(c, i) in $page.props.currencies" :key="i">
@@ -159,7 +159,7 @@ const submitDraft = () => {
                                                 id="production_cost"
                                                 @input="validateNumber( form,'production_cost')"
                                                 v-model="form.production_cost"
-                                                class="block w-full ps-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full ps-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                         </div>
                                         <InputError :message="form.errors.production_cost" class="mt-2" />
                                     </div>
@@ -174,7 +174,7 @@ const submitDraft = () => {
                                                 id="original_price"
                                                 @input="validateNumber( form,'original_price')"
                                                 v-model="form.original_price"
-                                                class="block w-full ps-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full ps-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                         </div>
                                         <InputError :message="form.errors.original_price" class="mt-2" />
                                     </div>
@@ -189,7 +189,7 @@ const submitDraft = () => {
                                                 id="sale_price"
                                                 @input="validateNumber( form,'sale_price')"
                                                 v-model="form.sale_price"
-                                                class="block w-full ps-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full ps-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                         </div>
                                         <InputError :message="form.errors.sale_price" class="mt-2" />
                                     </div>
@@ -198,11 +198,11 @@ const submitDraft = () => {
                                     <InputLabel for="pre-order-no" value="Pre-Order" />
                                     <div class="flex mt-2">
                                         <div class="flex items-center me-12">
-                                            <input v-model="form.pre_order" id="pre-order-yes" type="radio" :value="true" name="pre-order-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <input v-model="form.pre_order" id="pre-order-yes" type="radio" :value="true" name="pre-order-group" class="w-4 h-4 text-rose-600 bg-gray-100 border-gray-300 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             <label for="pre-order-yes" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
                                         </div>
                                         <div class="flex items-center me-12">
-                                            <input v-model="form.pre_order" id="pre-order-no" type="radio" :value="false" name="pre-order-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <input v-model="form.pre_order" id="pre-order-no" type="radio" :value="false" name="pre-order-group" class="w-4 h-4 text-rose-600 bg-gray-100 border-gray-300 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             <label for="pre-order-no" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
                                         </div>
                                     </div>
@@ -222,7 +222,7 @@ const submitDraft = () => {
                                                 id="weight"
                                                 @input="validateNumber(form, 'weight')"
                                                 v-model="form.weight"
-                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                             <div class="absolute text-gray-400 inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none">
                                                 {{ form.weight_unit }}
                                             </div>
@@ -232,7 +232,7 @@ const submitDraft = () => {
                                     <div>
                                         <InputLabel for="weight_unit" value="Weight Unit" />
                                         <select
-                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                            class="mt-1 block w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm"
                                             id="weight_unit"
                                             v-model="form.weight_unit">
                                             <option :value="u" v-for="(u, i) in $page.props.weightUnit" :key="i">
@@ -251,7 +251,7 @@ const submitDraft = () => {
                                                 id="width"
                                                 @input="validateNumber(form, 'width')"
                                                 v-model="form.width"
-                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                             <div class="absolute text-gray-400 inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none">
                                                 {{ form.dimension_unit }}
                                             </div>
@@ -266,7 +266,7 @@ const submitDraft = () => {
                                                 id="height"
                                                 @input="validateNumber(form, 'height')"
                                                 v-model="form.height"
-                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                             <div class="absolute text-gray-400 inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none">
                                                 {{ form.dimension_unit }}
                                             </div>
@@ -281,7 +281,7 @@ const submitDraft = () => {
                                                 id="length"
                                                 @input="validateNumber(form, 'length')"
                                                 v-model="form.length"
-                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                                class="block w-full text-right pe-14 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-rose-500 dark:focus:border-rose-600 focus:ring-rose-500 dark:focus:ring-rose-600 rounded-md shadow-sm">
                                             <div class="absolute text-gray-400 inset-y-0 end-0 flex items-center pe-3.5 pointer-events-none">
                                                 {{ form.dimension_unit }}
                                             </div>
@@ -291,7 +291,7 @@ const submitDraft = () => {
                                     <div>
                                         <InputLabel for="dimension_unit" value="Dimension Unit" />
                                         <select
-                                            class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                            class="mt-1 block w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm"
                                             id="dimension_unit"
                                             v-model="form.dimension_unit">
                                             <option :value="u" v-for="(u, i) in $page.props.dimensionUnit" :key="i">
@@ -306,11 +306,11 @@ const submitDraft = () => {
                                         <InputLabel for="allow-cod-no" value="Cash on Delivery" />
                                         <div class="flex mt-2">
                                             <div class="flex items-center me-12">
-                                                <input v-model="form.allow_cod" id="allow-cod-yes" type="radio" :value="true" name="allow-cod-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input v-model="form.allow_cod" id="allow-cod-yes" type="radio" :value="true" name="allow-cod-group" class="w-4 h-4 text-rose-600 bg-gray-100 border-gray-300 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="allow-cod-yes" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
                                             </div>
                                             <div class="flex items-center me-12">
-                                                <input v-model="form.allow_cod" id="allow-cod-no" type="radio" :value="false" name="allow-cod-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input v-model="form.allow_cod" id="allow-cod-no" type="radio" :value="false" name="allow-cod-group" class="w-4 h-4 text-rose-600 bg-gray-100 border-gray-300 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="allow-cod-no" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
                                             </div>
                                         </div>
@@ -319,11 +319,11 @@ const submitDraft = () => {
                                         <InputLabel for="hazardous-no" value="Contains Hazardous Material" />
                                         <div class="flex mt-2">
                                             <div class="flex items-center me-12">
-                                                <input v-model="form.contains_hazardous_material" id="hazardous-yes" type="radio" :value="true" name="hazardous-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input v-model="form.contains_hazardous_material" id="hazardous-yes" type="radio" :value="true" name="hazardous-group" class="w-4 h-4 text-rose-600 bg-gray-100 border-gray-300 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="hazardous-yes" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
                                             </div>
                                             <div class="flex items-center me-12">
-                                                <input v-model="form.contains_hazardous_material" id="hazardous-no" type="radio" :value="false" name="hazardous-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input v-model="form.contains_hazardous_material" id="hazardous-no" type="radio" :value="false" name="hazardous-group" class="w-4 h-4 text-rose-600 bg-gray-100 border-gray-300 focus:ring-rose-500 dark:focus:ring-rose-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="hazardous-no" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
                                             </div>
                                         </div>

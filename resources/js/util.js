@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 export const dateHumanFormat = (dateString) => {
     if (!dateString) return '-';
 
@@ -74,4 +76,21 @@ export const digitFormatter = (value) => new Intl.NumberFormat('id-ID').format(v
 export const validateNumber = (form, field) => {
     const value = form[field];
     form[field] = digitFormatter(value.replace(/[^0-9]/g, ''));
+};
+
+export const deleteConfirmation = (callback) => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#f43f5e",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonColor: "#1f2937",
+        cancelButtonText: "No, cancel",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
 };
