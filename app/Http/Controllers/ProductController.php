@@ -148,7 +148,7 @@ class ProductController extends Controller
             }
 
             $status = ProductStatus::tryFrom($request->input('status'));
-            if (!$status) {
+            if (! $status) {
                 return back()->dangerBanner('Invalid product status!');
             }
 
