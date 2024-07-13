@@ -31,6 +31,22 @@ const form = useForm({
     status: page.props.product.status,
 });
 
+const froalaConfig = {
+    pluginsEnabled: [
+        'align', 'charCounter', 'codeBeautifier', 'codeView', 'colors',
+        'draggable', 'embedly', 'emoticons', 'entities',
+        'fontFamily', 'fontSize', 'fullscreen', 'inlineStyle',
+        'inlineClass', 'lineBreaker', 'lineHeight', 'link',
+        'lists', 'paragraphFormat', 'paragraphStyle', 'quote',
+        'save', 'table', 'url', 'wordPaste',
+    ],
+    events: {
+        initialized: function () {
+            console.log('initialized')
+        },
+    }
+};
+
 const submit = () => {
     form.transform(data => ({
         ...data,
@@ -90,7 +106,7 @@ const submit = () => {
 
         <div class="py-12">
             <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
                     <form @submit.prevent="submit">
                         <div class="py-6 mx-auto px-6 2xl:py-16 2xl:px-16">
                             <h2 class="mb-4 text-xl font-bold text-gray-900">Product Information</h2>
@@ -108,8 +124,8 @@ const submit = () => {
                                     <InputError :message="form.errors.name" class="mt-2" />
                                 </div>
                                 <div class="sm:col-span-2">
-                                    <InputLabel for="description" value="Description" />
-                                    <textarea id="description" v-model="form.description" rows="4" class="mt-1 block w-full border-gray-300 focus:border-rose-500 focus:ring-rose-500 rounded-md shadow-sm"></textarea>
+                                    <InputLabel for="description" value="Description" class="mb-1" />
+                                    <froala id="description" :tag="'textarea'" rows="4" :config="froalaConfig" v-model:value="form.description"></froala>
                                     <InputError :message="form.errors.description" class="mt-2" />
                                 </div>
                             </div>
