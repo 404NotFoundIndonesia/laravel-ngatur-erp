@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,7 +19,7 @@ class UpdateProductRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -28,16 +29,16 @@ class UpdateProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'specification' => ['nullable'],
             'status' => ['required', 'string'],
-            'height' => ['required', 'numeric', 'gt:0'],
-            'width' => ['required', 'numeric', 'gt:0'],
-            'length' => ['required', 'numeric', 'gt:0'],
+            'height' => ['required', 'numeric', 'min:0'],
+            'width' => ['required', 'numeric', 'min:0'],
+            'length' => ['required', 'numeric', 'min:0'],
             'dimension_unit' => ['required', 'string'],
-            'weight' => ['required', 'numeric', 'gt:0'],
+            'weight' => ['required', 'numeric', 'min:0'],
             'weight_unit' => ['required', 'string'],
             'currency' => ['required', 'string'],
-            'original_price' => ['required', 'numeric', 'gte:0'],
-            'sale_price' => ['required', 'numeric', 'gte:0'],
-            'product_cost' => ['required', 'numeric', 'gte:0'],
+            'original_price' => ['required', 'numeric', 'min:0'],
+            'sale_price' => ['required', 'numeric', 'min:0'],
+            'production_cost' => ['required', 'numeric', 'min:0'],
             'pre_order' => ['boolean', 'nullable'],
             'allow_cod' => ['boolean', 'nullable'],
             'contains_hazardous_material' => ['boolean', 'nullable'],

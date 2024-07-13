@@ -24,5 +24,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('products', ProductController::class);
+    Route::delete('product/bulk', [ProductController::class, 'destroyBulk'])->name('products.destroy-bulk');
+    Route::post('product/status/bulk', [ProductController::class, 'setStatus'])->name('products.set-status-bulk');
 
 });
