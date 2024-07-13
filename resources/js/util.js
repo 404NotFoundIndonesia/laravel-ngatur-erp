@@ -68,3 +68,10 @@ export const snakeCaseToTitleCase = (input) => {
         .map(word => word[0].toUpperCase() + word.slice(1))
         .join(' ');
 };
+
+export const digitFormatter = (value) => new Intl.NumberFormat('id-ID').format(value);
+
+export const validateNumber = (form, field) => {
+    const value = form[field];
+    form[field] = digitFormatter(value.replace(/[^0-9]/g, ''));
+};

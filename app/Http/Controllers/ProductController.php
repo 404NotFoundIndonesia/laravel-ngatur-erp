@@ -9,7 +9,6 @@ use App\Enum\Unit\Weight;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -83,6 +82,9 @@ class ProductController extends Controller
     {
         return Inertia::render('Product/Edit', [
             'product' => $product,
+            'currencies' => Currency::cases(),
+            'dimensionUnit' => Dimension::cases(),
+            'weightUnit' => Weight::cases(),
         ]);
     }
 
@@ -91,7 +93,16 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        try {
+            $input = $request->validated();
+            $product->update($input);
+
+            return back()->banner('Successfully updated the product');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return back()->dangerBanner('Failed to update the product');
+        }
     }
 
     /**

@@ -4,29 +4,31 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import ActionMessage from '@/Components/ActionMessage.vue';
-import { Link, useForm } from '@inertiajs/vue3';
-import {currencySymbol, validateNumber} from '@/util';
+import {Link, useForm, usePage} from '@inertiajs/vue3';
+import {currencySymbol, digitFormatter, validateNumber} from '@/util';
+
+const page = usePage();
 
 const form = useForm({
-    name: '',
-    description: '',
-    sku: '',
-    weight: '0',
-    weight_unit: 'g',
-    height: '0',
-    width: '0',
-    length: '0',
-    dimension_unit: 'cm',
-    currency: 'IDR',
-    original_price: '0',
-    sale_price: '0',
-    production_cost: '0',
-    pre_order: false,
-    allow_cod: false,
-    contains_hazardous_material: false,
-    status: 'active',
+    id: page.props.product.id,
+    name: page.props.product.name,
+    description: page.props.product.description,
+    sku: page.props.product.sku,
+    weight: digitFormatter(page.props.product.weight),
+    weight_unit: page.props.product.weight_unit,
+    height: digitFormatter(page.props.product.height),
+    width: digitFormatter(page.props.product.width),
+    length: digitFormatter(page.props.product.length),
+    dimension_unit: page.props.product.dimension_unit,
+    currency: page.props.product.currency,
+    original_price: digitFormatter(page.props.product.original_price),
+    sale_price: digitFormatter(page.props.product.sale_price),
+    production_cost: digitFormatter(page.props.product.production_cost),
+    pre_order: page.props.product.pre_order,
+    allow_cod: page.props.product.allow_cod,
+    contains_hazardous_material: page.props.product.contains_hazardous_material,
+    status: page.props.product.status,
 });
 
 const submit = () => {
@@ -39,29 +41,9 @@ const submit = () => {
         original_price: data.original_price.replace(/\./g, ''),
         sale_price: data.sale_price.replace(/\./g, ''),
         production_cost: data.production_cost.replace(/\./g, ''),
-        status: 'active',
-    })).post(route('products.store'), {
+    })).put(route('products.update', page.props.product.id), {
         preserveScroll: true,
         preserveState: true,
-        onSuccess: () => form.reset(),
-    });
-};
-
-const submitDraft = () => {
-    form.transform(data => ({
-        ...data,
-        weight: data.weight.replace(/\./g, ''),
-        height: data.height.replace(/\./g, ''),
-        width: data.width.replace(/\./g, ''),
-        length: data.length.replace(/\./g, ''),
-        original_price: data.original_price.replace(/\./g, ''),
-        sale_price: data.sale_price.replace(/\./g, ''),
-        production_cost: data.production_cost.replace(/\./g, ''),
-        status: 'draft',
-    })).post(route('products.store'), {
-        preserveScroll: true,
-        preserveState: true,
-        onSuccess: () => form.reset(),
     });
 };
 </script>
@@ -335,9 +317,6 @@ const submitDraft = () => {
                             <ActionMessage :on="form.recentlySuccessful" class="me-3">
                                 Saved.
                             </ActionMessage>
-                            <SecondaryButton @click="submitDraft" type="button" :class="{ 'opacity-25': form.processing }" class="me-2" :disabled="form.processing">
-                                Save as Draft
-                            </SecondaryButton>
                             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing || (form.original_price == 0 && form.sale_price == 0)">
                                 Save
                             </PrimaryButton>

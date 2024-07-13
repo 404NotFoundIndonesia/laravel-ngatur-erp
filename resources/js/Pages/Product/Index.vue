@@ -126,7 +126,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
 
@@ -242,7 +242,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
                                                 <div :id="`product-id-${product.id}-dropdown`" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" :aria-labelledby="`product-id-${product.id}`">
                                                         <li>
-                                                            <Link :href="route('dashboard')" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</Link>
+                                                            <Link :href="route('products.edit', product.id)" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</Link>
                                                         </li>
                                                         <li v-if="product.status === 'active'">
                                                             <a href="#" @click="() => changeStatus(product.id, 'archived')" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Archive</a>
@@ -274,7 +274,7 @@ const showStatusLabel = ['inactive', 'archived', 'discontinued', 'out_of_stock',
 
 
         <nav v-show="selected.length > 0" class="fixed bottom-0 w-full bg-white shadow-xl z-50 dark:bg-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
                 <div class="flex">
                     <button @click="() => changeStatusBulk('archived')" v-if="$page.props.request?.status === 'active'" type="button" class="me-2 px-4 py-2 text-sm font-medium text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
                         Archive Selected
