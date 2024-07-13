@@ -69,7 +69,19 @@ const submit = () => {
                     </li>
                     <li aria-current="page">
                         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                            Add New Product
+                            {{ $page.props.product.sku ?? $page.props.product.name }}
+                        </h2>
+                    </li>
+                    <li class="mx-2">
+                        <div>
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                            Edit Product
                         </h2>
                     </li>
                 </ol>
